@@ -9,6 +9,7 @@ sendBtn.addEventListener('click', () => {
 	$(sendBtn).toggleClass('loading');
 	termSelectionDiv.classList.add('d-none');
 	resultsDiv.innerHTML = null;
+	termSelect.innerHTML = null;
 
 	$.getJSON(
 		'https://api.allorigins.win/get?url=' +
