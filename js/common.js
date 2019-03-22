@@ -21,6 +21,10 @@ sendBtn.addEventListener('click', () => {
 			),
 		function(data) {
 			let table = $(data.contents).find('table#studrating')[0];
+			if (table == undefined) {
+				let emptyResults = document.getElementById('noResults').content.cloneNode(true);;
+				resultsDiv.append(emptyResults);
+			} else {
 			let terms = $(table).find('tbody tr td:first-child');
 			let uniqTerms = [];
 			for (i = 0; i < terms.length; i++) {
@@ -60,9 +64,9 @@ sendBtn.addEventListener('click', () => {
 			}
 
 			filterResults(uniqTerms[0]);
-
-			$(sendBtn).toggleClass('loading');
 			termSelectionDiv.classList.remove('d-none');
+			}
+			$(sendBtn).toggleClass('loading');
 		}
 	);
 });

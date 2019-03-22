@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
-<body>
+<body class="bg-gray">
     <div class="container grid-xs">
         <h3 class="text-center pt-2">Рейтинг студентов ИГХТУ</h3>
 
@@ -24,24 +24,36 @@
         </div>
 
         <button class="btn p-centered" id="send">Узнать рейтинг</button>
-        <div id="termSelection" class="d-none">
-            <label for="terms">Семестр</label>
-            <select class="mt-2" name="Семестр" id="terms" onchange="filterResults(this.value)"></select>
+
+        <div id="termSelection" class="input-group mt-2 d-none">
+                <label for="terms" class="input-group-addon">Семестр</label>
+                <select class="form-select" name="Семестр" id="terms" onchange="filterResults(this.value)"></select>
         </div>
         
         <div id="results"></div>
 
-        <div class="author mt-2 text-center">
+        <div class="author m-2 text-center">
             made by <a href="https://newdarkstar.github.io/">d4rkst4r</a>, 2019
         </div>
     </div>
 
+    <template id="noResults">
+        <div class="empty">
+            <div class="empty-icon">
+                <i class="icon icon-cross icon-4x"></i>
+            </div>
+            <p class="empty-title h5">Результатов нет!</p>
+            <p class="empty-subtitle">Проверьте правильность введенных данных</p>
+        </div>
+    </template>
+    
     <template id="subjectCard">
         <div class="card mt-2">
             <div class="term d-none"></div>
             <div class="card-header">
                 <div class="card-title text-center subjectTitle"></div>
             </div>
+            <div class="divider"></div>
             <div class="card-body">
                 <div class="container">
                     <div class="columns">
@@ -55,16 +67,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                <td>К.Т.1</td>
+                                <td>К.Т. 1</td>
                                 <td class="mark"></td>
                                 <td class="truancy"></td>
                                 </tr>
                                 <tr>
-                                <td>К.Т.2</td>
+                                <td>К.Т. 2</td>
                                 <td class="mark"></td>
                                 <td class="truancy"></td>
                                 </tr>
-                                <td>К.Т.2</td>
+                                <td>К.Т. 3</td>
                                 <td class="mark"></td>
                                 <td class="truancy"></td>
                                 </tr>
