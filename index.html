@@ -21,13 +21,16 @@
             <input class="form-input" type="text" id="studnum" placeholder="Номер студенческого билета">
             <label class="form-label" for="passnum">Номер паспорта</label>
             <input class="form-input" type="text" id="passnum" placeholder="Номер паспорта">
+            <label class="form-checkbox">
+                <input type="checkbox" id="rememberMe">
+                <i class="form-icon"></i> Запомнить меня
+            </label>
+            <button class="btn p-centered" id="send">Узнать рейтинг</button>
         </div>
 
-        <button class="btn p-centered" id="send">Узнать рейтинг</button>
-
         <div id="termSelection" class="input-group mt-2 d-none">
-                <label for="terms" class="input-group-addon">Семестр</label>
-                <select class="form-select" name="Семестр" id="terms" onchange="filterResults(this.value)"></select>
+            <label for="terms" class="input-group-addon">Семестр</label>
+            <select class="form-select" name="Семестр" id="terms" onchange="filterResults(this.value)"></select>
         </div>
         
         <div id="results"></div>
@@ -92,6 +95,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="js/common.js"></script>
 </body>
 </html>

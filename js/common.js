@@ -1,15 +1,29 @@
-let studnum = document.querySelector('#studnum');
-let passnum = document.querySelector('#passnum');
-let sendBtn = document.querySelector('#send');
-let resultsDiv = document.querySelector('#results');
-let termSelect = document.querySelector('#terms');
-let termSelectionDiv = document.querySelector('#termSelection');
+let studnum = document.getElementById('studnum');
+let passnum = document.getElementById('passnum');
+let sendBtn = document.getElementById('send');
+let resultsDiv = document.getElementById('results');
+let termSelect = document.getElementById('terms');
+let termSelectionDiv = document.getElementById('termSelection');
+let cookSet = document.getElementById('rememberMe');
+
+let studCook = Cookies.get('studNum');
+let passCook = Cookies.get('passNum');
+
+if (studCook != undefined && passCook != undefined) {
+	studnum.value = studCook;
+	passnum.value = passCook;
+}
 
 sendBtn.addEventListener('click', () => {
 	$(sendBtn).toggleClass('loading');
 	termSelectionDiv.classList.add('d-none');
 	resultsDiv.innerHTML = null;
 	termSelect.innerHTML = null;
+
+	if (cookSet.checked) {
+		Cookies.set('studNum', studnum.value, {expires: 365});
+		Cookies.set('passNum', passnum.value, {expires: 365});
+	}
 
 	$.getJSON(
 		'https://api.allorigins.win/get?url=' +
