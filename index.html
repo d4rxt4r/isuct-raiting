@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="made by darkstar">
+    <meta name="author" content="made by d4rkst4r">
     <title>Рейтинг студентов ИГХТУ</title>
 
     <link rel="shortcut icon" href="gerbmin.png" type="image/png">
@@ -21,25 +21,25 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label" for="studnum">Номер студенческого билета</label>
-            <input class="form-input" type="text" id="studnum" placeholder="Номер студенческого билета">
-            <label class="form-label" for="passnum">Номер паспорта</label>
-            <input class="form-input" type="text" id="passnum" placeholder="Номер паспорта">
+            <label class="form-label" for="student-id">Номер студенческого билета</label>
+            <input class="form-input" type="text" id="student-id" placeholder="Номер студенческого билета">
+            <label class="form-label" for="passport-number">Номер паспорта</label>
+            <input class="form-input" type="text" id="passport-number" placeholder="Номер паспорта">
             <label class="form-checkbox">
-                <input type="checkbox" id="rememberMe">
+                <input type="checkbox" id="remember-me-checkbox">
                 <i class="form-icon"></i> Запомнить меня
             </label>
-            <button class="btn p-centered" id="send">Узнать рейтинг</button>
+            <button class="btn p-centered" id="get-results-btn">Узнать рейтинг</button>
         </div>
 
-        <div id="termSelection" class="input-group mt-2 d-none">
-            <label for="terms" class="input-group-addon">Семестр</label>
-            <select class="form-select" name="Семестр" id="terms"
-                onchange="filterResults(this.value); createStatistic(tP, tPA, tT, parseInt(this.value));"></select>
+        <div id="term-selection" class="input-group mt-2 d-none">
+            <label for="terms-select" class="input-group-addon">Семестр</label>
+            <select class="form-select" name="Семестр" id="terms-select"
+                onchange="filter_results_by_term(this.value); create_statistic(tP, tPA, tT, parseInt(this.value));"></select>
         </div>
 
         <div id="statistics" class="text-center d-none">
-            <a href="#stats" id="showStats" class="text-center">Показать статистику</a>
+            <a href="#stats" id="show-statistics-btn" class="text-center">Показать статистику</a>
             <div id="stats" class="d-none">
                 <div class="columns">
                     <div class="column col-2 text-center">К.Т.</div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="column col-3 text-center">Прогулы</div>
                 </div>
-                <div class="columns" id="lines">
+                <div class="columns" id="statistics-lines">
                     <!-- Appending each checkpoint -->
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <div id="results"></div>
     </div>
 
-    <template id="noResults">
+    <template id="no-results">
         <div class="empty">
             <div class="empty-icon">
                 <i class="icon icon-cross icon-4x"></i>
@@ -68,24 +68,24 @@
         </div>
     </template>
 
-    <template id="statisticsLine">
+    <template id="statistics-line">
         <div class="column col-2 kt text-center">К.Т.1</div>
         <div class="column col-4 text-center">
-            <span class="totalPerformance">0</span>
+            <span class="total-progress">0</span>
         </div>
         <div class="column col-3 text-center">
-            <span class="totalPerformancePercent">0%</span>
+            <span class="total-progress-percentage">0%</span>
         </div>
         <div class="column col-3 text-center">
-            <span class="totalTruancy">0</span>
+            <span class="total-absences">0</span>
         </div>
     </template>
 
-    <template id="subjectCard">
+    <template id="subject-card">
         <div class="card mt-2">
             <div class="term d-none"></div>
             <div class="card-header">
-                <div class="card-title text-center subjectTitle"></div>
+                <div class="card-title text-center subject-title"></div>
             </div>
             <div class="divider"></div>
             <div class="card-body">
@@ -102,17 +102,17 @@
                             <tbody>
                                 <tr>
                                     <td>К.Т. 1</td>
-                                    <td class="mark"></td>
-                                    <td class="truancy"></td>
+                                    <td class="points"></td>
+                                    <td class="absences"></td>
                                 </tr>
                                 <tr>
                                     <td>К.Т. 2</td>
-                                    <td class="mark"></td>
-                                    <td class="truancy"></td>
+                                    <td class="points"></td>
+                                    <td class="absences"></td>
                                 </tr>
                                 <td>К.Т. 3</td>
-                                <td class="mark"></td>
-                                <td class="truancy"></td>
+                                <td class="points"></td>
+                                <td class="absences"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -122,9 +122,6 @@
         </div>
     </template>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-        </script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="js/common.js"></script>
 </body>
