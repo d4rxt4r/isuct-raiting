@@ -35,7 +35,7 @@
         <div id="term-selection" class="input-group mt-2 d-none">
             <label for="terms-select" class="input-group-addon">Семестр</label>
             <select class="form-select" name="Семестр" id="terms-select"
-                onchange="filter_results_by_term(this.value); create_statistic(tP, tPA, tT, parseInt(this.value));"></select>
+                onchange="filter_results_by_term(this.value); create_statistic(student_progress, potential_progress, total_absences, parseInt(this.value));"></select>
         </div>
 
         <div id="statistics" class="text-center d-none">

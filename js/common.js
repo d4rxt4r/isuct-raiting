@@ -9,8 +9,10 @@ const statistics = document.getElementById('statistics');
 const statistics_lines_wrap = document.getElementById('statistics-lines');
 const show_statistics_btn = document.getElementById('show-statistics-btn');
 
-let studend_id_cookie = Cookies.get('STUD_ID');
-let passport_number_cookie = Cookies.get('PASS_NUM');
+const studend_id_cookie = Cookies.get('STUD_ID');
+const passport_number_cookie = Cookies.get('PASS_NUM');
+
+let student_progress, potential_progress, total_absences;
 
 if (studend_id_cookie != undefined && passport_number_cookie != undefined) {
 	student_id.value = studend_id_cookie;
@@ -25,7 +27,7 @@ show_statistics_btn.addEventListener('click', (e) => {
 });
 
 function filter_results_by_term(term) {
-	all_subject_cards = document.querySelectorAll('.card');
+	const all_subject_cards = document.querySelectorAll('.card');
 	all_subject_cards.forEach(card => {
 		card_term = card.querySelector('.term').innerText;
 		card_term !=term ? card.classList.add("d-none") : card.classList.remove("d-none");
@@ -42,7 +44,7 @@ function create_statistic(t_p, t_p_p, t_a, term) {
 	const statistics_line_template = document.getElementById('statistics-line').content.cloneNode(true);
 
 	for (i = 0; i < 3; i++) {
-		let statistics_line =  statistics_line_template.cloneNode(true);
+		const statistics_line =  statistics_line_template.cloneNode(true);
 
 		statistics_line.querySelector('.kt').innerHTML = i + 1;
 
@@ -88,7 +90,7 @@ async function get_results() {
 		Cookies.set('PASS_NUM', passport_number.value, { expires: 365 });
 	}
 
-	let url = `https://api.allorigins.win/get?url=${encodeURIComponent(
+	const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
 		`https://www.isuct.ru/student/rating/view?paspnumber=${passport_number.value}&studnumber=${student_id.value}`
 	)}`
 
@@ -102,7 +104,7 @@ async function get_results() {
 		const data_table = parsing_document.querySelector('table#studrating');
 		const terms = data_table.querySelectorAll('tbody tr td:first-child');
 		let unique_terms = [];
-		let student_progress, potential_progress, total_absences, column, points, absences, term, subject_card;
+		let column, points, absences, term, subject_card;
 		let PE = false;
 		const subject_card_template = document.getElementById('subject-card').content.cloneNode(true);
 
@@ -117,11 +119,11 @@ async function get_results() {
 
 		const records = data_table.querySelectorAll('tbody tr');
 
-		total_absences = create_nesting_array(records.length, 4);
 		student_progress = create_nesting_array(records.length, 4);
 		potential_progress = create_nesting_array(records.length, 4);
+		total_absences = create_nesting_array(records.length, 4);
 
-		for (i = 0; i < records.length; i++) {
+		for (let i = 0; i < records.length; i++) {
 			column = 6;
 			subject_card = subject_card_template.cloneNode(true);
 			term = parseInt(records[i].querySelector('td:nth-child(1)').innerText);
@@ -137,7 +139,7 @@ async function get_results() {
 				PE = true;
 			} else { PE = false }
 
-			for (j = 0; j < 3; j++) {
+			for (let j = 0; j < 3; j++) {
 				points = records[i].querySelector('td:nth-child(' + column + ')').innerText;
 				subject_card.querySelectorAll('.points')[j].innerText = points;
 
@@ -165,7 +167,7 @@ async function get_results() {
 		statistics.classList.remove('d-none');
 	}).catch((error) => {
 		console.warn('Something went wrong.', error);
-		let empty_results_template = document.getElementById('no-results').content.cloneNode(true);
+		const empty_results_template = document.getElementById('no-results').content.cloneNode(true);
 		results_wrap.append(empty_results_template);
 	});
 }
