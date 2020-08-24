@@ -90,7 +90,7 @@ async function get_results() {
 		Cookies.set('PASS_NUM', passport_number.value, { expires: 365 });
 	}
 
-	const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
+	const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(
 		`https://www.isuct.ru/student/rating/view?paspnumber=${passport_number.value}&studnumber=${student_id.value}`
 	)}`
 
