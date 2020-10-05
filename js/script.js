@@ -19,7 +19,7 @@ if (studend_id_cookie != undefined && passport_number_cookie != undefined) {
 	passport_number.value = passport_number_cookie;
 }
 
-get_results_btn.addEventListener('click', async () => get_results(), false);
+get_results_btn.addEventListener('click', () => get_results(), false);
 
 show_statistics_btn.addEventListener('click', (e) => {
 	e.preventDefault();
